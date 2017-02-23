@@ -1,0 +1,73 @@
+<link rel="import" href="imports.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="song-card">
+  <template>
+  <style is="custom-style">
+    paper-card.rate { @apply(--layout-horizontal); }
+
+    .rate-content {
+      @apply(--layout-flex);
+      float: left;
+    }
+    .rate-header { @apply(--paper-font-headline); }
+    .rate-name { color: var(--paper-grey-600); margin: 10px 0; }
+    paper-icon-button.rate-icon {
+      --iron-icon-fill-color: white;
+      --iron-icon-stroke-color: var(--paper-grey-600);
+    }
+  </style>
+  <paper-card class="rate">
+    <div class="rate-content">
+      <div class="card-content">
+        <div class="rate-header">{{title}}</div>
+        <div class="rate-name">{{by}}</div>
+
+
+      </div>
+      <div class="card-actions">
+          <a title="{{title}}" img="{{img}}" href="{{href}}">
+        <paper-button>
+  <iron-icon src="https://image.flaticon.com/icons/svg/263/263123.svg"></iron-icon>
+</paper-button>
+
+</a>
+<template is="dom-if" if="[[result]]">
+<template is="dom-if" if="[[loggedIn]]">
+<add-playlist title="{{title}}" file="{{href}}">
+</add-playlist>
+</template>
+<add-offline file="{{href}}" title="{{title}}"></add-offline>
+</template>
+      </div>
+    </div>
+
+  </paper-card>
+  <br>
+  <br>
+  </template>
+
+  <script>
+  Polymer({
+      is: 'song-card',
+      properties:{
+        href:String,
+        img:String,
+        href:String,
+        title:String,
+        result:{
+        type:Boolean,
+        reflectToAttribute:true,
+        notify:true,
+        },
+        loggedIn:{
+          reflectToAttribute:true,
+          notify:true,
+          type:Boolean,
+
+        },
+        by:String,
+      },
+    });
+
+   </script>
+ </dom-module>
